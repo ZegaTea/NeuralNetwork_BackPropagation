@@ -2,6 +2,7 @@ import neuron.NeuralNetwork;
 import process.Process;
 import util.CommonUtils;
 import process.*;
+import util.ConfigurationManager;
 
 
 public class Main {
@@ -10,8 +11,9 @@ public class Main {
     private static double[][] testData = null;
 
     public static void main(String[] args) throws Exception {
+        String fileName = ConfigurationManager.getInstance().getString("file.data");
         Process process = new Process();
-        double[][] allData = process.getInput();
+        double[][] allData = process.getInput(fileName);
         makeTrainTest(allData);
 
         final int numInput = 4;
