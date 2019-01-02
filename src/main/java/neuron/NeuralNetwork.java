@@ -155,7 +155,7 @@ public class NeuralNetwork {
     }
 
     //  ----------------------------------------------------------------------------------------
-    private final double[] ComputeOutputs(double[] xValues) throws Exception {
+    private final double[] computeOutputs(double[] xValues) throws Exception {
         if ((xValues.length != numInput)) {
             throw new Exception("Bad xValues array length");
         }
@@ -209,7 +209,7 @@ public class NeuralNetwork {
         return retResult;
     }
 
-    //  ComputeOutputs
+    //  computeOutputs
     private static double hyperTanFunction(double x) {
         if ((x < -20)) {
             return -1;
@@ -252,7 +252,7 @@ public class NeuralNetwork {
     //  ----------------------------------------------------------------------------------------
     private final void updateWeights(double[] tValues, double learnRate, double momentum) {
         //  update the weights and biases using back-propagation, with target values, eta (learning rate), alpha (momentum)
-        //  assumes that setWeights and ComputeOutputs have been called and so all the internal arrays and matrices have values (other than 0.0)
+        //  assumes that setWeights and computeOutputs have been called and so all the internal arrays and matrices have values (other than 0.0)
         if ((tValues.length != numOutput)) {
             return;
 //            throw new Exception("target values not same Length as output in updateWeights");
@@ -377,7 +377,7 @@ public class NeuralNetwork {
                 System.arraycopy(trainData[idx], numInput, tValues, 0, numOutput);
                 try {
 
-                    ComputeOutputs(xValues);
+                    computeOutputs(xValues);
                 } catch (Exception e) {
 
                 }
@@ -416,7 +416,7 @@ public class NeuralNetwork {
             System.arraycopy(trainData[i], numInput, tValues, 0, numOutput);
 
             //  get target values
-            double[] yValues = this.ComputeOutputs(xValues);
+            double[] yValues = this.computeOutputs(xValues);
             //  compute output using current weights
             for (int j = 0; (j < numOutput); j++) {
                 double err = (tValues[j] - yValues[j]);
@@ -445,7 +445,7 @@ public class NeuralNetwork {
             //  parse test data into x-values and t-values
             System.arraycopy(testData[i], numInput, tValues, 0, numOutput);
 
-            yValues = this.ComputeOutputs(xValues);
+            yValues = this.computeOutputs(xValues);
             int maxIndex = maxIndex(yValues);
             //  which cell in yValues has largest value?
             if ((tValues[maxIndex] == 1)) {
